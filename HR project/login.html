@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
     <style>
-        *{
+    *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -128,19 +128,45 @@ p>a:hover{
 <body>
     <div class="container">
         <h2>Login</h2>
-        <form action="">
+        <form id="loginForm">
             <div class="form-group">
-                <input type="email" required>
-                <label for="">Email</label>
+                <input type="email" id="email" required>
+                <label for="email">Email</label>
             </div>
             <div class="form-group">
-                <input type="password" required>
-                <label for="">Password</label>
+                <input type="password" id="password" required>
+                <label for="password">Password</label>
             </div>
             <p><input type="checkbox" >Remember Me<a href="#">Forgot Password</a></p>
             <input id="btn" type="button" value="Login">
-            <p>Don't have a account?<a href="register.html">Register</a></p>
+            <p>Don't have an account?<a href="register.html">Register</a></p>
         </form>
     </div>
+    <script>
+        document.getElementById('btn').addEventListener('click', function() {
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+    
+            // Here you can perform validation of email and password
+            // For simplicity, I'm just checking if they are not empty
+            if (email.trim() === '' || password.trim() === '') {
+                alert('Please enter both email and password');
+            } else if (password.length < 9) {
+                alert('Password must be at least 9 characters.');
+            } else if (!hasSpecialCharacter(password)) {
+                alert('Password must contain at least one special character');
+            } else {
+                // Here you can send a request to the server to authenticate the user
+                // For simplicity, I'm just displaying a success message
+                alert('Login successful. Welcome, ' + email + '!');
+            }
+        });
+    
+        function hasSpecialCharacter(str) {
+            var specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+            return specialCharacters.test(str);
+        }
+    </script>
+    
 </body>
 </html>

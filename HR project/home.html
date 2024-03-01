@@ -140,24 +140,34 @@ button:hover {
     </div>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-    const adminButton = document.querySelector(".content button:nth-of-type(1)");
-    const employeeButton = document.querySelector(".content button:nth-of-type(2)");
-
-    adminButton.addEventListener("click", function() {
-        showPopupAndRedirect("Register");
-    });
-
-    employeeButton.addEventListener("click", function() {
-        showPopupAndRedirect("Register");
-    });
-
-    function showPopupAndRedirect(userType) {
-        if (confirm('You have to ' + userType)) {
-            window.location.href = "register.html"; // Replace "registration.html" with the actual URL of your registration form
-        }
-    }
-});
-
+            const adminButton = document.querySelector(".content button:nth-of-type(1)");
+            const employeeButton = document.querySelector(".content button:nth-of-type(2)");
+        
+            const links = document.querySelectorAll(".navbar ul li a");
+        
+            adminButton.addEventListener("click", function() {
+                showPopupAndRedirect("Register");
+            });
+        
+            employeeButton.addEventListener("click", function() {
+                showPopupAndRedirect("Register");
+            });
+        
+            links.forEach(function(link) {
+                link.addEventListener("click", function(event) {
+                    event.preventDefault(); // Prevent the default behavior of the link
+                    showPopupAndRedirect("Register");
+                });
+            });
+        
+            function showPopupAndRedirect(userType) {
+                if (confirm('You have to ' + userType)) {
+                    window.location.href = "register.html"; // Replace "registration.html" with the actual URL of your registration form
+                }
+            }
+        });
+        </script>
+        
 
     </script>
 </body>
