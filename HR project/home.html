@@ -82,6 +82,14 @@
     line-height: 25px;
 }
 
+.popup-link {
+    display: inline-block;
+    margin-top: 20px;
+    text-decoration: none;
+    color: #30d7f1;
+    font-weight: bold;
+}
+
 button{
     width: 200px;
     padding: 15px 0;
@@ -122,21 +130,50 @@ button:hover {
         <div class="navbar">
             <img src="logo1.png" alt="logo" class="logo">
             <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Attendance</a></li>
-            <li><a href="#">Contact</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="login.html">Login</a></li>
-        </ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Attendance</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="login.html">Login</a></li>
+            </ul>
         </div>
         <div class="content">
             <h1>Welcome To HR</h1>
             <p>Without the right succession planning put to play in human resources, <br> build for the future without a future.</p>
-            <div>
-                <button type="button"><span></span>Admin</button>
-                <button type="button"><span></span>Employee</button>
-            </div>
+        
         </div>
     </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const adminButton = document.querySelector(".content button:nth-of-type(1)");
+            const employeeButton = document.querySelector(".content button:nth-of-type(2)");
+        
+            const links = document.querySelectorAll(".navbar ul li a");
+        
+            adminButton.addEventListener("click", function() {
+                showPopupAndRedirect("Register");
+            });
+        
+            employeeButton.addEventListener("click", function() {
+                showPopupAndRedirect("Register");
+            });
+        
+            links.forEach(function(link) {
+                link.addEventListener("click", function(event) {
+                    event.preventDefault(); // Prevent the default behavior of the link
+                    showPopupAndRedirect("Register");
+                });
+            });
+        
+            function showPopupAndRedirect(userType) {
+                if (confirm('You have to ' + userType)) {
+                    window.location.href = "register.html"; // Replace "registration.html" with the actual URL of your registration form
+                }
+            }
+        });
+        </script>
+        
+
+    </script>
 </body>
 </html>
