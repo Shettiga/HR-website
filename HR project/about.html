@@ -62,13 +62,17 @@
     width: 100%;
 }
 
-.content{
-    width: 100%;
+.content {
+    width: 75%; /* Adjusted width */
+    max-width: 800px; /* Added max-width to prevent content from extending too wide */
     position: absolute;
     top: 50%;
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center vertically and horizontally */
     color: #fff;
     text-align: center;
-    transform: translateY(-50%);
+    border-radius: 20px; /* Added border-radius for rounded corners */
+    padding: 30px; /* Added padding for spacing inside the border */
 }
 
 .content h1{
