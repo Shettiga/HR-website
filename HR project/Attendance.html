@@ -9,26 +9,30 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-        }
-
-        #attendance1.html {
-            background-image: url('"C:\Users\hp\Desktop\attdance.webp"');
+            width: 100%;
+            height: 100vh;
+            background-image: linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),url(background.jpg);
             background-size: cover;
             background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
-        
+
         h1 {
             text-align: center;
-            color: #0f0f0fe8;
+            color: #faf5f5e8;
         }
         
         form {
-            width: 50%;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 420px;
+            background: transparent;
+            border:  2px solid rgba(255, 255, 255, .2);
+            backdrop-filter: blur(10px);
+            color: #fff;
+            border-radius: 12px;
+            padding: 30px 40px;
         }
         
         label {
@@ -45,32 +49,36 @@
             margin-bottom: 10px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-family: Arial Black, sans-serif; /* Font style added */
         }
 
         input[type="submit"] {
-            background-color: #ff0080;
-            color: #fff;
+            width: 100%;
+            height: 50px;
+            background: #4febeb;
             border: none;
+            outline: none;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
             cursor: pointer;
-            border-radius: 25px; /* Round shape */
-            padding: 15px 20px; /* Adjust padding as needed */
-            font-size: 16px; /* Adjust font size as needed */
+            font-size: 1.0em;
+            color: #333;
+            font-weight: 600;
+            transition: 0.5s;
+            margin-bottom: 10px; 
         }
 
         input[type="submit"]:hover {
-            background-color: #0056b3;
+            background: rgb(0,0,0,0.3);
+            color: #fff;
         }
     </style>
 </head>
 <body id="attendance-page">
-    <h1>Attendance Page</h1>
     <form action="process_attendance.php" method="post">
-        <label for="name">Name:</label>
+        <h1>Attendance Page</h1>
+        <label for="name">Emp id:</label>
         <input type="text" id="name" name="name" required><br><br>
-        
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        
         <label for="department">Department:</label>
         <select id="department" name="department" required>
             <option value="">Select Department</option>
@@ -78,10 +86,7 @@
             <option value="Finance">Finance</option>
             <option value="IT">IT</option>
             <option value="Recruitment">Recruitment</option>
-            <option value="HR Manager">HR Manager</option>
-            
-
-            <!-- Add more options as needed -->
+             <!-- Add more options as needed -->
         </select><br><br>
       <label for="date">Date:</label>
       <input type="date" id="date" name="date" required><br><br>
