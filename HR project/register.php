@@ -19,7 +19,7 @@ $table = "hr_login";
 // SQL statement to create table if it doesn't exist
 $sql_create_table = "CREATE TABLE IF NOT EXISTS $table (
     id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,
+    name VARCHAR(255) NOT NULL,s
     dob DATE,
     phone VARCHAR(20),
     gender char(1),
