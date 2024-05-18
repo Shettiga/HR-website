@@ -26,7 +26,7 @@ if(isset($_POST['admin'])){
         if ($pass === $storedPassword) {
             // Passwords match, user is authenticated
             echo "Login successful!";
-            header("");
+            header("location:dashboard.html");
         } else {
             echo "Password incorrect";
         }
