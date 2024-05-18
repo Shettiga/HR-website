@@ -12,27 +12,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-
 // Define table name
 $table = "hr_login";
-
-// SQL statement to create table if it doesn't exist
-$sql_create_table = "CREATE TABLE IF NOT EXISTS $table (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    name VARCHAR(255) NOT NULL,s
-    dob DATE,
-    phone VARCHAR(20),
-    gender char(1),
-    password VARCHAR(255) NOT NULL,
-    email VARCHAR(255) NOT NULL UNIQUE
-)";
-
-// Execute SQL statement to create table
-if ($conn->query($sql_create_table) === TRUE) {
-    echo "Table created successfully or already exists";
-} else {
-    echo "Error creating table: " . $conn->error;
-}
 
 // Fetching values from the form
 $U_fname = $_POST["fname"];
