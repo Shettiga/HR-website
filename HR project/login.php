@@ -46,7 +46,7 @@ elseif(isset($_POST['Emp'])){
         if ($pass === $storedPassword) {
             // Passwords match, user is authenticated
             echo "Login successful!";
-            header("");
+            header("Location:Employee.html");
         } else {
             echo "Password incorrect";
         }
