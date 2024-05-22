@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Department View</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        th {
+            background-color: #f4f4f4;
+        }
+        .error {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>View Employees by Department</h1>
+        <label for="department">Select Department:</label>
+        <select id="department">
+            <option value="">--Select Department--</option>
+            <option value="Sales">Sales</option>
+            <option value="Engineering">Engineering</option>
+            <option value="HR">HR</option>
+        </select>
+        <button onclick="fetchEmployees()">View Employees</button>
+        <div id="employeeTable"></div>
+    </div>
+
+    <script>
+        function fetchEmployees() {
+            const department = document.getElementById('department').value;
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'fetch_employees.php', true);
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function () {
+                if (this.status === 200) {
+                    document.getElementById('employeeTable').innerHTML = this.responseText;
+                } else {
+                    document.getElementById('employeeTable').innerHTML = '<p class="error">Error fetching employees.</p>';
+                }
+            }
+            xhr.send('department=' + department);
+        }
+    </script>
+</body>
+</html>
