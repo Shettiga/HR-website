@@ -1,37 +1,35 @@
 <?php
 $servername = "localhost";
-$username = "root"; // Use your database username
-$password = ""; // Use your database password
-$dbname = "company";
+$username = "root";
+$password = "";
+$dbname = "hr_management"; // Replace with your actual database name
 
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
+// Check connection
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $department = $_POST['department'];
-    
-    if (!empty($department)) {
-        $stmt = $conn->prepare("SELECT name FROM employees WHERE department = ?");
-        $stmt->bind_param("s", $department);
-        $stmt->execute();
-        $result = $stmt->get_result();
-        
-        if ($result->num_rows > 0) {
-            echo "<table><tr><th>Name</th></tr>";
-            while($row = $result->fetch_assoc()) {
-                echo "<tr><td>" . $row['name'] . "</td></tr>";
-            }
-            echo "</table>";
-        } else {
-            echo "<p>No employees found in this department.</p>";
-        }
-        $stmt->close();
-    } else {
-        echo "<p class='error'>Please select a department.</p>";
+$sql = "SELECT id, dep_name FROM department";
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    echo "<table border='1'>
+            <tr>
+                <th>ID</th>
+                <th>Department Name</th>
+            </tr>";
+    while($row = $result->fetch_assoc()) {
+        echo "<tr>
+                <td>" . $row['id'] . "</td>
+                <td>" . $row['dep_name'] . "</td>
+              </tr>";
     }
+    echo "</table>";
+} else {
+    echo "No departments found.";
 }
 
 $conn->close();

@@ -3,114 +3,127 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Employee Department View</title>
+    <title>Department</title>
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
+
         .container {
-            width: 80%;
-            margin: auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2em;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        h1 i {
+            margin-right: 10px;
+        }
+
+        .form-container {
+            background-color: #000;
             padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+            width: 300px;
         }
-        table {
-            width: 100%;
-            border-collapse: collapse;
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
         }
-        th, td {
-            padding: 10px;
-            border: 1px solid #ddd;
-            text-align: left;
+
+        .form-header h2 {
+            color: #fff;
+            margin: 0;
         }
-        th {
-            background-color: #f4f4f4;
+
+        .close-btn {
+            color: #fff;
+            cursor: pointer;
+            font-size: 1.5em;
         }
-        .error {
-            color: red;
-        }
+
         .form-group {
             margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            color: #fff;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"], select {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: none;
+            outline: none;
+            font-size: 1em;
+        }
+
+        .submit-btn {
+            background-color: #d2a0ff;
+            color: #000;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            width: 100%;
+        }
+
+        .submit-btn:hover {
+            background-color: #c68fff;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Manage Departments and Employees</h1>
-
-        <h2>Add Department</h2>
-        <div class="form-group">
-            <label for="newDepartment">Department Name:</label>
-            <input type="text" id="newDepartment" />
-            <button onclick="addDepartment()">Add Department</button>
-        </div>
-
-        <h2>View Employees by Department</h2>
-        <label for="department">Select Department:</label>
-        <select id="department">
-            <!-- Departments will be populated here by JavaScript -->
-        </select>
-        <button onclick="fetchEmployees()">View Employees</button>
-        <div id="employeeTable"></div>
+        <h1><i class="fas fa-building"></i> Department</h1>
+        <form action="" method="post" class="form-container">
+            <div class="form-header">
+                <h2>Add department</h2>
+                <span class="close-btn" onclick="closeForm()">×</span>
+            </div>
+            <div class="form-group">
+                <label for="employeeId">Employee ID:</label>
+                <input type="text" id="employeeId" placeholder="Enter the employee ID" />
+            </div>
+            <div class="form-group">
+                <label for="departmentList">Department:</label>
+                <select id="departmentList">
+                    <option value="">--Select Department--</option>
+                    <option value="1">Administration</option>
+                    <option value="2">Finance, HR, & Administration</option>
+                    <option value="3">Research</option>
+                    <option value="4">Information Technology</option>
+                    <option value="5">Support</option>
+                    <option value="6">Network Engineering</option>
+                    <option value="7">Sales and Marketing</option>
+                    <option value="8">Helpdesk</option>
+                    <option value="9">Project Management</option>
+                </select>
+            </div>
+            <button class="submit-btn" onclick="addEmployee()">ADD</button>
+        </form>
     </div>
-
-    <script>
-        function fetchDepartments() {
-            fetch('fetch_departments.php')
-                .then(response => response.json())
-                .then(departments => {
-                    const select = document.getElementById('department');
-                    select.innerHTML = '<option value="">--Select Department--</option>';
-                    departments.forEach(function(department) {
-                        const option = document.createElement('option');
-                        option.value = department.id;
-                        option.textContent = department.name;
-                        select.appendChild(option);
-                    });
-                });
-        }
-
-        function addDepartment() {
-            const departmentName = document.getElementById('newDepartment').value;
-            fetch('add_department.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    'name': departmentName
-                })
-            })
-            .then(response => response.text())
-            .then(message => {
-                alert(message);
-                fetchDepartments(); // Refresh the department list
-            });
-        }
-
-        function fetchEmployees() {
-            const departmentId = document.getElementById('department').value;
-            fetch('fetch_employees.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/x-www-form-urlencoded'
-                },
-                body: new URLSearchParams({
-                    'department_id': departmentId
-                })
-            })
-            .then(response => response.text())
-            .then(data => {
-                document.getElementById('employeeTable').innerHTML = data;
-            })
-            .catch(error => {
-                document.getElementById('employeeTable').innerHTML = '<p class="error">Error fetching employees.</p>';
-            });
-        }
-
-        // Fetch departments on page load
-        window.onload = function() {
-            fetchDepartments();
-        };
-    </script>
+    
+    
 </body>
 </html>
