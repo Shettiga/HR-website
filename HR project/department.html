@@ -28,37 +28,89 @@
         .error {
             color: red;
         }
+        .form-group {
+            margin-bottom: 15px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>View Employees by Department</h1>
+        <h1>Manage Departments and Employees</h1>
+
+        <h2>Add Department</h2>
+        <div class="form-group">
+            <label for="newDepartment">Department Name:</label>
+            <input type="text" id="newDepartment" />
+            <button onclick="addDepartment()">Add Department</button>
+        </div>
+
+        <h2>View Employees by Department</h2>
         <label for="department">Select Department:</label>
         <select id="department">
-            <option value="">--Select Department--</option>
-            <option value="Sales">Sales</option>
-            <option value="Engineering">Engineering</option>
-            <option value="HR">HR</option>
+            <!-- Departments will be populated here by JavaScript -->
         </select>
         <button onclick="fetchEmployees()">View Employees</button>
         <div id="employeeTable"></div>
     </div>
 
     <script>
-        function fetchEmployees() {
-            const department = document.getElementById('department').value;
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'fetch_employees.php', true);
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onload = function () {
-                if (this.status === 200) {
-                    document.getElementById('employeeTable').innerHTML = this.responseText;
-                } else {
-                    document.getElementById('employeeTable').innerHTML = '<p class="error">Error fetching employees.</p>';
-                }
-            }
-            xhr.send('department=' + department);
+        function fetchDepartments() {
+            fetch('fetch_departments.php')
+                .then(response => response.json())
+                .then(departments => {
+                    const select = document.getElementById('department');
+                    select.innerHTML = '<option value="">--Select Department--</option>';
+                    departments.forEach(function(department) {
+                        const option = document.createElement('option');
+                        option.value = department.id;
+                        option.textContent = department.name;
+                        select.appendChild(option);
+                    });
+                });
         }
+
+        function addDepartment() {
+            const departmentName = document.getElementById('newDepartment').value;
+            fetch('add_department.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'name': departmentName
+                })
+            })
+            .then(response => response.text())
+            .then(message => {
+                alert(message);
+                fetchDepartments(); // Refresh the department list
+            });
+        }
+
+        function fetchEmployees() {
+            const departmentId = document.getElementById('department').value;
+            fetch('fetch_employees.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'department_id': departmentId
+                })
+            })
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('employeeTable').innerHTML = data;
+            })
+            .catch(error => {
+                document.getElementById('employeeTable').innerHTML = '<p class="error">Error fetching employees.</p>';
+            });
+        }
+
+        // Fetch departments on page load
+        window.onload = function() {
+            fetchDepartments();
+        };
     </script>
 </body>
 </html>
