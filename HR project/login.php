@@ -13,11 +13,11 @@ if ($conn->connect_error) {
 }
 
 if(isset($_POST['admin'])){
-    $table = "hr_login";
-    $mail=$_POST["email"];
+    $table = "admin_login";
+    $user=$_POST["email"];
     $pass=$_POST["password"];
     
-    $sql = "SELECT * FROM $table WHERE email='$mail'";
+    $sql = "SELECT * FROM $table WHERE username='$user'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // now check the password
