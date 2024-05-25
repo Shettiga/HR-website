@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 $servername = "localhost";
 $username = "root";
 $password = "";
@@ -25,8 +27,9 @@ if(isset($_POST['admin'])){
         $storedPassword = $row['password']; 
         if ($pass === $storedPassword) {
             // Passwords match, user is authenticated
-            echo "Login successful!";
+            $_SESSION['user_id']=$user;
             header("location:dashboard.html");
+            exit();
         } else {
             echo "Password incorrect";
         }
