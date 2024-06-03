@@ -111,5 +111,8 @@ if(!isset($_SESSION['user_id'])){
             alert("Attendance submitted successfully!");
         });
     </script>
+    <?PHP 
+
+    ?>
 </body>
 </html>
