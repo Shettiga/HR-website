@@ -26,7 +26,7 @@ $U_phone = $_POST["phone"];
 $U_gender = $_POST["gender"];
 
 // Inserting values into the database
-$sql_insert = "INSERT INTO $table (name, bca dob, phone, gender, password, email) VALUES ('$U_fname $U_mname $U_lname', '$U_dob', '$U_phone', '$U_gender', '$U_password', '$U_email')";
+$sql_insert = "INSERT INTO $table (name,  dob, phone, gender, password, email) VALUES ('$U_fname $U_mname $U_lname', '$U_dob', '$U_phone', '$U_gender', '$U_password', '$U_email')";
 
 // Execute SQL statement to insert data
 if ($conn->query($sql_insert) === TRUE) {
