@@ -106,5 +106,10 @@ if(!isset($_SESSION['user_id'])){
         
         <input type="submit" value="Submit">
     </form>
+    <script>
+        document.getElementById("attendance-form").addEventListener("submit", function(event) {
+            alert("Attendance submitted successfully!");
+        });
+    </script>
 </body>
 </html>
