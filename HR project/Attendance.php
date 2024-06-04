@@ -83,10 +83,10 @@ if(!isset($_SESSION['user_id'])){
     </style>
 </head>
 <body id="attendance-page">
-    <form action="process_attendance.php" method="post">
+    <form action="" method="post">
         <h1>Attendance Page</h1>
-        <label for="name">Emp id:</label>
-        <input type="text" id="name" name="name" required><br><br>
+        <label for="eid">Emp id:</label>
+        <input type="text" id="eid" name="eid" required><br><br>
         <label for="department">Department:</label>
         <select id="department" name="department" required>
             <option value="">Select Department</option>
@@ -104,12 +104,75 @@ if(!isset($_SESSION['user_id'])){
         <label for="logout_time">Logout Time:</label>
         <input type="time" id="logout_time" name="logout_time" required><br><br>
         
-        <input type="submit" value="Submit">
+        <label for="place">place:</label>
+        <select id="place" name="place" required>
+            <option value="">Select place</option>
+            <option value="office">office</option>
+            <option value="field">field</option>
+            <option value="workfromhome">workfromhome</option>
+        </select><br><br>
+        
+        <input type="submit" value="Submit" name="submit">
     </form>
     <script>
         document.getElementById("attendance-form").addEventListener("submit", function(event) {
             alert("Attendance submitted successfully!");
         });
     </script>
+    <?php
+    $servername = "localhost";
+    $username = "root";
+    $password = "";
+    $database = "hr_management";
+    $table = "attendenece";
+    // Create connection
+    $conn = new mysqli($servername, $username, $password,$database);
+
+    // Check connection
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    if(isset($_POST['submit']))
+    {
+    $eid=$_POST['eid'];
+    $dpt=$_POST['department'];
+    $date=$_POST['date'];
+    $login_time=$_POST['login_time'];
+    $logout_time=$_POST['logout_time'];
+    $place=$_POST['place'];
+    $login_datetime_str = $date . ' ' . $login_time;
+    $logout_datetime_str = $date . ' ' . $logout_time;
+    $login_timestamp = strtotime($login_datetime_str);
+    $logout_timestamp = strtotime($logout_datetime_str);
+
+    // Calculate the difference in seconds
+    $time_worked_in_seconds =  $logout_timestamp - $login_timestamp;
+
+    // Check if the logout time is after the login time
+    if ($time_worked_in_seconds < 0) {
+        echo "Logout time must be after login time.";
+        exit;
+    }
+
+    // Convert the time worked into hours, minutes, and seconds
+    $hours = floor($time_worked_in_seconds / 3600);
+    $minutes = floor(($time_worked_in_seconds % 3600) / 60);
+    $seconds = $time_worked_in_seconds % 60;
+
+    // Format the output
+    $time_worked = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+
+    $sql="INSERT INTO `attendance`( `emp_id`, `atten_date`, `signin_time`, `signout_time`, `working_hour`, `place`)
+     VALUES ('$eid','$date','$login_time','$logout_time','$time_worked','$place')";
+     if ($conn->query($sql) === TRUE) {
+        echo "<script>alert('ATTENDENCE ENTERD');</script>";
+    } else {
+        echo"<script>alert(". $conn->error.");</script>" ;
+    }
+    
+    $conn->close();
+}
+    ?>
 </body>
 </html>
