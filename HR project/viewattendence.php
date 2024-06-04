@@ -13,7 +13,8 @@ if ($conn->connect_error) {
 }
 
 
-$sql = "SELECT * FROM Attendence";
+$sql = "SELECT * FROM attendance";
+$result = $conn->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -56,10 +57,9 @@ $sql = "SELECT * FROM Attendence";
             <th>Em-Id</th>
             <th>Starting Date</th>
             <th>Ending Date</th>
-            <th>Reason</th>
-            <th>Status</th>
-            <th>duration</th>
-            <th>Approve/Reject</th>
+            <th>place</th>
+            
+            
         
         </tr>
         <?php
@@ -67,9 +67,10 @@ $sql = "SELECT * FROM Attendence";
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row["emp_id"] . "</td>";
-                echo "<td>" . $row["login_time"] . "</td>";
-                echo "<td>" . $row["logout_time"] . "</td>";
+                echo "<td>" . $row["signin_time"] . "</td>";
+                echo "<td>" . $row["signout_time"] . "</td>";
                 echo "<td>" . $row["working_hour"] . "</td>";
+                echo "<td>" . $row["place"] . "</td>";
                 echo "</tr>";
             }
         } else {
