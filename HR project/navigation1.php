@@ -1,8 +1,11 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $navBtn = $_POST['navBtn'];
-    if ($navBtn === '1') {
-        include "viewattedance.php";
+    if ($navBtn === 'Y') {
+        echo "<img src='about3.jpg'>";
+    }
+    elseif($navBtn === '1') {
+        include "viewattendence.php";
     } elseif ($navBtn === '2') {
         include "department.html";
     } elseif ($navBtn === '3') {
@@ -10,9 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }elseif ($navBtn === '4') {
         include "viewresignation.php";
     }elseif ($navBtn === '5') {
-        include "salary.php";
-    } elseif ($navBtn === '6') {
-            include "salary.php";
+        include "salary.html";
     }else {
         echo "Invalid navigation.";
     }

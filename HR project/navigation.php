@@ -1,7 +1,10 @@
 <?php
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $navBtn = $_POST['navBtn'];
-    if ($navBtn === 'D') {
+    if ($navBtn === 'Y') {
+        echo "<img src='about3.jpg'>";
+    }elseif($navBtn=='D'){
+        
         include "leave.php";
     } elseif ($navBtn === 'A') {
         include "attendance.php";
