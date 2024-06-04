@@ -79,8 +79,9 @@ if ($conn->connect_error) {
     </style>
 </head>
 <body>
+    <button onclick="backHome();" >Go Back</button>
 <h2>Apply for Leave</h2>
-    <form action="" method="post">
+    <form action="applyLeave.php" method="post">
         <div class="form-group">
             <label for="em_id">Employee ID:</label>
             <input type="text" id="em_id" name="em_id" required>
@@ -111,7 +112,7 @@ if ($conn->connect_error) {
             $reason = $_POST['reason'];
             $leave_duration = $_POST['leave_duration'];
             $apply_date = date('Y-m-d');
-            $leave_status = 'NV'; // NV stands for Not Verified
+            $leave_status = 'Not Approve';
         
             $sql1 = "INSERT INTO emp_leave (em_id, start_date, end_date, reason, leave_duration, leave_status,apply_date) 
                     VALUES ('$em_id', '$start_date', '$end_date', '$reason', '$leave_duration', '$leave_status','$apply_date')";
@@ -132,13 +133,12 @@ if ($conn->connect_error) {
             <th>Starting Date</th>
             <th>Ending Date</th>
             <th>Reason</th>
-            <th>Status</th>
             <th>duration</th>
-            <th>Approve/Reject</th>
+            <th>Approved/Rejectd</th>
         
         </tr>
         <?php
-        $sql = "SELECT * FROM emp_leave where leave_status ='Noone'";
+        $sql = "SELECT * FROM emp_leave where leave_status ='Not Approve'";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
@@ -148,20 +148,8 @@ if ($conn->connect_error) {
                 echo "<td>" . $row["start_date"] . "</td>";
                 echo "<td>" . $row["end_date"] . "</td>";
                 echo "<td>" . $row["reason"] . "</td>";
-                echo "<td>" . $row["leave_status"] . "</td>";
                 echo "<td>" . $row["leave_duration"] . "</td>";
-                echo '<td>
-                        <form method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="' . $row["id"] . '">
-                            <input type="hidden" name="action" value="aprove">
-                            <button type="submit" class="approve-button " name="approve">Approve</button>
-                        </form>
-                        <form method="post" style="display:inline;">
-                            <input type="hidden" name="id" value="' . $row["id"] . '">
-                            <input type="hidden" name="action" value="reject">
-                            <button type="submit" class="reject-button" name="reject">Reject</button>
-                        </form>
-                      </td>';
+                echo "<td>" . $row["leave_status"] . "</td>";
                 echo "</tr>";
             }
         } else {
@@ -184,4 +172,9 @@ if ($conn->connect_error) {
         ?>
     </table>
 </body>
+<script>
+    function backHome() {   
+        window.location.href = "Employee.php";
+    }
+</script>
 </html>

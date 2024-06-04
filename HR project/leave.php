@@ -29,6 +29,7 @@ if(isset($_POST['approve'])||isset($_POST['reject']))
 {
     $action = $_POST['action'];
     $id = $_POST['id'];
+    echo "Working";
     if ($action == 'approve') {
         $sql = "UPDATE emp_leave SET leave_status='APPROVED' WHERE id=$id";
     } else if ($action == 'reject') {
@@ -101,7 +102,7 @@ if(isset($_POST['approve'])||isset($_POST['reject']))
                             <input type="hidden" name="action" value="aprove">
                             <button type="submit" class="approve-button " name="approve">Approve</button>
                         </form>
-                        <form method="post" style="display:inline;">
+                        <form method="post" action="" style="display:inline;">
                             <input type="hidden" name="id" value="' . $row["id"] . '">
                             <input type="hidden" name="action" value="reject">
                             <button type="submit" class="reject-button" name="reject">Reject</button>

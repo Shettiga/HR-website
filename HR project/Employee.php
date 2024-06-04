@@ -645,6 +645,12 @@ body {
 					<span class="text">Salary</span>
 				</a>
 			
+				<li>
+				<a href="#" onclick="navigate('2')">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">notices</span>
+				</a>
+			</li>
 			</li>
 			<li>
 				<a href="#" onclick="navigate('R')">
@@ -684,7 +690,7 @@ body {
 	
 
 	<script>
-		navigate('Y');
+		
 		function navigate(navBtn) {
         // Make an AJAX request to the server with the navBtn value
         const xhr = new XMLHttpRequest();

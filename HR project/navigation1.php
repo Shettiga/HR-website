@@ -14,6 +14,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         include "viewresignation.php";
     }elseif ($navBtn === '5') {
         include "salary.html";
+    }elseif($navBtn==='6')
+    {
+      include"notices.php";
+    
     }else {
         echo "Invalid navigation.";
     }

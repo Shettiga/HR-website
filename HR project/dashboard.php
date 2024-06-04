@@ -5,6 +5,7 @@
 		exit();
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -648,6 +649,7 @@ body {
 					<span class="text">viewResignation</span>
 				</a>
 			</li>
+
 			
 		
 			<li>
