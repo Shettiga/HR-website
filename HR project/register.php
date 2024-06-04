@@ -31,6 +31,7 @@ $sql_insert = "INSERT INTO $table (name,  dob, phone, gender, password, email) V
 // Execute SQL statement to insert data
 if ($conn->query($sql_insert) === TRUE) {
     echo "New record created successfully";
+    header("location:login.html");
 } else {
     echo "Error inserting record: " . $conn->error;
 }
