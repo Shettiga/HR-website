@@ -639,6 +639,12 @@ body {
 					<i class='bx bxs-message-dots' ></i>
 					<span class="text">Leave</span>
 				</a>
+				<li>
+				<a href="#" onclick="navigate('S')">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Salary</span>
+				</a>
+			
 			</li>
 			<li>
 				<a href="#" onclick="navigate('R')">

@@ -11,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         include "applyLeave.php";
     }elseif ($navBtn === 'R') {
         include "ResignForm.php";
+    }elseif ($navBtn === 'S') {
+        include "Salary.php";
     }else {
         echo "Invalid navigation.";
     }
