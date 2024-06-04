@@ -1,3 +1,10 @@
+<?php
+	session_start();
+	if(!isset($_SESSION['user_id']) && !isset($_SESSION['user_id'])){
+		header("location:login.php");
+		exit();
+	}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -613,57 +620,65 @@ body {
 	<section id="sidebar">
 		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
-			<span class="text">EmployeeHub</span>
+			<span class="text">Admin Dashboard</span>
 		</a>
 		<ul class="side-menu top">
 			<li class="active">
-				<a href="#">
+				<a href="#" onclick="navigate('1')">
 					<i class='bx bxs-dashboard' ></i>
 					<span class="text">Dashboard</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="#" onclick="navigate('2')">
 					<i class='bx bxs-calendar-check' ></i>
-					<span class="text">Attendence</span>
+					<span class="text"> viewattendence</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="#" onclick="navigate('3')">
 					<i class='bx bxs-doughnut-chart' ></i>
 					<span class="text">Department</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="#" onclick="navigate('4')">
 					<i class='bx bxs-message-dots' ></i>
 					<span class="text">Leave</span>
 				</a>
 			</li>
 			<li>
-				<a href="#">
+				<a href="#" onclick="navigate('5')">
 					<i class='bx bxs-group' ></i>
-					<span class="text">Resignation</span>
+					<span class="text">viewResignation</span>
 				</a>
 			</li>
 			
-		</ul>
-		<ul class="side-menu">
+		
 			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
+				<a href="#" onclick="navigate('6')">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Salary</span>
 				</a>
 			</li>
 			<li>
-				<a href="#" class="logout">
-					<i class='bx bxs-log-out-circle' ></i>
+				<a href="#"  onclick="navigate('7')">
+					<i class='bx bxs-log-out-circle'></i>
 					<span class="text">Logout</span>
 				</a>
 			</li>
-		</ul>
+		
+		
+		
 	</section>
 	<!-- SIDEBAR -->
+
+	<section id="content">
+		<main id="main-content">
+			
+		</main>
+
+	</section>
 
 
 
@@ -671,6 +686,20 @@ body {
 	
 
 	<script>
+		navigate('1');
+		function navigate(navBtn) {
+        // Make an AJAX request to the server with the navBtn value
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'navigation1.php', true);
+        xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                // Update the main content with the response from the server
+                document.getElementById('main-content').innerHTML = xhr.responseText;
+            }
+        };
+        xhr.send('navBtn=' + navBtn);
+    }
 		
 const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 

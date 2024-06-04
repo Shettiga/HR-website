@@ -28,7 +28,8 @@ if(isset($_POST['admin'])){
         if ($pass === $storedPassword) {
             // Passwords match, user is authenticated
             $_SESSION['user_id']=$user;
-            header("location:dashboard.html");
+            $_SESSION['user_type']="adm";
+            header("location:dashboard.php");
             exit();
         } else {
             echo "Password incorrect";
@@ -47,9 +48,11 @@ elseif(isset($_POST['Emp'])){
         $row = $result->fetch_assoc();
         $storedPassword = $row['password']; 
         if ($pass === $storedPassword) {
+            $_SESSION['user_id']=$mail;
+            $_SESSION['user_type']="emp";
             // Passwords match, user is authenticated
             echo "Login successful!";
-            header("Location:Employee.html");
+            header("Location:Employee.php");
         } else {
             echo "Password incorrect";
         }
