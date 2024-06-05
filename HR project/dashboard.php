@@ -681,7 +681,7 @@ body {
 	
 
 	<script>
-		navigate('Y');
+		navigate('');
 		function navigate(navBtn) {
         // Make an AJAX request to the server with the navBtn value
         const xhr = new XMLHttpRequest();
