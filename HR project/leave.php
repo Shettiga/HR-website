@@ -12,29 +12,27 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-//     $id = $_POST['id'];
-//     $action = $_POST['action'];
-//     if ($action == 'approve') {
-//         $sql = "UPDATE emp_leave SET leave_status='APPROVED' WHERE id=$id";
-//     } else if ($action == 'reject') {
-//         $sql = "UPDATE emp_leave SET leave_status='REJECTED' WHERE id=$id";
-//     }
-//     $conn->query($sql);
-// }
-
-$sql = "SELECT * FROM emp_leave where leave_status ='Not Approve'";
-$result = $conn->query($sql);
-if(isset($_POST['approve'])||isset($_POST['reject']))
-{
-    $action = $_POST['action'];
+// Process form submission
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $id = $_POST['id'];
+    $action = $_POST['action'];
+
     if ($action == 'approve') {
         $sql = "UPDATE emp_leave SET leave_status='APPROVED' WHERE id=$id";
     } else if ($action == 'reject') {
         $sql = "UPDATE emp_leave SET leave_status='REJECTED' WHERE id=$id";
     }
+
+    if ($conn->query($sql) === TRUE) {
+        echo "Leave status updated successfully.";
+    } else {
+        echo "Error updating leave status: " . $conn->error;
+    }
 }
+
+// Fetch leave requests
+$sql = "SELECT * FROM emp_leave WHERE leave_status='Not Approve'";
+$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -58,12 +56,14 @@ if(isset($_POST['approve'])||isset($_POST['reject']))
             background-color: #f2f2f2;
         }
         .approve-button, .reject-button {
-            background-color: #4CAF50;
             color: white;
             padding: 10px 20px;
             margin: 5px;
             border: none;
             cursor: pointer;
+        }
+        .approve-button {
+            background-color: #4CAF50;
         }
         .reject-button {
             background-color: #f44336;
@@ -80,9 +80,8 @@ if(isset($_POST['approve'])||isset($_POST['reject']))
             <th>Ending Date</th>
             <th>Reason</th>
             <th>Status</th>
-            <th>duration</th>
+            <th>Duration</th>
             <th>Approve/Reject</th>
-        
         </tr>
         <?php
         if ($result->num_rows > 0) {
@@ -98,8 +97,8 @@ if(isset($_POST['approve'])||isset($_POST['reject']))
                 echo '<td>
                         <form method="post" style="display:inline;">
                             <input type="hidden" name="id" value="' . $row["id"] . '">
-                            <input type="hidden" name="action" value="aprove">
-                            <button type="submit" class="approve-button " name="approve">Approve</button>
+                            <input type="hidden" name="action" value="approve">
+                            <button type="submit" class="approve-button" name="approve">Approve</button>
                         </form>
                         <form method="post" style="display:inline;">
                             <input type="hidden" name="id" value="' . $row["id"] . '">

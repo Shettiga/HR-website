@@ -51,13 +51,33 @@
             <!-- Add more departments as needed -->
         </select>
     </div>
-   
     <div class="form-group">
-        <label for="basic_salary">Basic Salary:</label>
+        <label for="basic_salary">Basic Salary (per hour):</label>
         <input type="number" id="basic_salary" name="basic_salary" required>
+    </div>
+    <div class="form-group">
+        <label for="hours_worked">Hours Worked:</label>
+        <input type="number" id="hours_worked" name="hours_worked" required>
     </div>
     <button type="submit" name="calculate">Calculate Salary</button>
 </form>
+
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['calculate'])) {
+    $emp_id = $_POST['emp_id'];
+    $department = $_POST['department'];
+    $basic_salary = $_POST['basic_salary'];
+    $hours_worked = $_POST['hours_worked'];
+    
+    // Calculate total salary
+    $total_salary = $basic_salary * $hours_worked;
+    
+    // Display the result
+    include "connection.php";
+    $sql="INSERT INTO `emp_salary`( `emp_id`, `department`, `salary`) VALUES ('$emp_id','$department','$total_salary')";
+    $res=$conn->query($sql);
+}
+?>
 
 </body>
 </html>

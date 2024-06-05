@@ -1,3 +1,18 @@
+<?php
+
+session_start();
+
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION['user_type'] != "emp") {
+    header("Location: home.html");
+    exit();
+}
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_type'])) {
+    $user_id = $_SESSION['user_id'];
+    $userType = $_SESSION['user_type'];
+
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -615,13 +630,13 @@ body {
 			<i class='bx bxs-smile'></i>
 			<span class="text">EmployeeHub</span>
 		</a>
+		<a class="brand" id="logDetail" style="margin-left: 5%;">
+				
+                <?php if (isset($user_id)) : ?>
+                    Welcome, <?php echo $user_id; ?><img src="user.png" alt="" id="UserIcon" style=" height:100%;width: auto;">
+                <?php endif; ?>
+            </a>
 		<ul class="side-menu top">
-			<li class="active">
-				<a href="#" onclick="navigate('D')">
-					<i class='bx bxs-dashboard' ></i>
-					<span class="text">Dashboard</span>
-				</a>
-			</li>
 			<li>
 				<a href="#" onclick="navigate('A')">
 					<i class='bx bxs-calendar-check' ></i>
@@ -645,6 +660,12 @@ body {
 					<span class="text">Salary</span>
 				</a>
 			
+				<li>
+				<a href="#" onclick="navigate('2')">
+					<i class='bx bxs-doughnut-chart' ></i>
+					<span class="text">notices</span>
+				</a>
+			</li>
 			</li>
 			<li>
 				<a href="#" onclick="navigate('R')">
@@ -662,7 +683,7 @@ body {
 				</a>
 			</li>
 			<li>
-				<a href="#" class="logout">
+				<a href="#" class="logout" onclick="window.location.href='logout.php'">
 					<i class='bx bxs-log-out-circle' ></i>
 					<span class="text">Logout</span>
 				</a>
@@ -684,7 +705,7 @@ body {
 	
 
 	<script>
-		navigate('Y');
+		
 		function navigate(navBtn) {
         // Make an AJAX request to the server with the navBtn value
         const xhr = new XMLHttpRequest();
