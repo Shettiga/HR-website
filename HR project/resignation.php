@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $leavingDate = $_POST['leavingDate'];
     $department = $_POST['department'];
     
-    $sql = "INSERT INTO Resignation (employee_id, username, password, phone, joining_date,Leaving_date, department) VALUES ( '$employeeId', '$username', 'password', '$phone', '$joiningDate', '$leavingDate', '$department')";
+    $sql = "INSERT INTO resignation (  `employee_id`, `username`,` password`, `phone`, `joining_date`,`Leaving_date`, `department`) VALUES ( '$employeeId', '$username', 'password', '$phone', '$joiningDate', '$leavingDate', '$department')";
 
     if ($conn->query($sql) === TRUE) {
         echo "Resignation submitted successfully!";

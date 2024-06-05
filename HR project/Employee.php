@@ -643,11 +643,7 @@ body {
 					<span class="text">Attendence</span>
 				</a>
 			</li>
-			<li>
-				<a href="#" onclick="navigate('Dep')">
-					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">Department</span>
-				</a>
+			
 			</li>
 			<li>
 				<a href="#" onclick="navigate('L')">
@@ -660,13 +656,7 @@ body {
 					<span class="text">Salary</span>
 				</a>
 			
-				<li>
-				<a href="#" onclick="navigate('2')">
-					<i class='bx bxs-doughnut-chart' ></i>
-					<span class="text">notices</span>
-				</a>
-			</li>
-			</li>
+				
 			<li>
 				<a href="#" onclick="navigate('R')">
 					<i class='bx bxs-group' ></i>
@@ -675,13 +665,7 @@ body {
 			</li>
 			
 		</ul>
-		<ul class="side-menu">
-			<li>
-				<a href="#">
-					<i class='bx bxs-cog' ></i>
-					<span class="text">Settings</span>
-				</a>
-			</li>
+		
 			<li>
 				<a href="#" class="logout" onclick="window.location.href='logout.php'">
 					<i class='bx bxs-log-out-circle' ></i>

@@ -20,7 +20,7 @@ $result = $conn->query($sql);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Leave Requests</title>
+    <title>viewattendence</title>
     <style>
         table {
             width: 100%;

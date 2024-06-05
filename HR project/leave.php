@@ -14,19 +14,23 @@ if ($conn->connect_error) {
 
 // Process form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $id = $_POST['id'];
-    $action = $_POST['action'];
+    if (isset($_POST['id']) && isset($_POST['action'])) {
+        $id = $_POST['id'];
+        $action = $_POST['action'];
 
-    if ($action == 'approve') {
-        $sql = "UPDATE emp_leave SET leave_status='APPROVED' WHERE id=$id";
-    } else if ($action == 'reject') {
-        $sql = "UPDATE emp_leave SET leave_status='REJECTED' WHERE id=$id";
-    }
+        if ($action == 'approve') {
+            $sql = "UPDATE emp_leave SET leave_status='APPROVED' WHERE id=$id";
+        } else if ($action == 'reject') {
+            $sql = "UPDATE emp_leave SET leave_status='REJECTED' WHERE id=$id";
+        }
 
-    if ($conn->query($sql) === TRUE) {
-        echo "Leave status updated successfully.";
+        if (isset($sql) && $conn->query($sql) === TRUE) {
+            echo "Leave status updated successfully.";
+        } else {
+            echo "Error updating leave status: " . $conn->error;
+        }
     } else {
-        echo "Error updating leave status: " . $conn->error;
+        echo "Invalid request. Please try again.";
     }
 }
 

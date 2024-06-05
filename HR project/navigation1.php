@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }elseif ($navBtn === '4') {
         include "resignation.php";
     }elseif ($navBtn === '5') {
-        include "salary.php";
+        include "adminsalary.php";
     }elseif($navBtn==='6')
     {
       include"notices.php";
