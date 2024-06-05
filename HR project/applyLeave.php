@@ -138,7 +138,7 @@ if ($conn->connect_error) {
         
         </tr>
         <?php
-        $sql = "SELECT * FROM emp_leave where leave_status ='Not Approve'";
+        $sql = "SELECT * FROM emp_leave ";
         $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {

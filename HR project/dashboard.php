@@ -1,9 +1,15 @@
 <?php
-	session_start();
-	if(!isset($_SESSION['user_id']) && !isset($_SESSION['user_id'])){
-		header("location:login.php");
-		exit();
-	}
+session_start();
+
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION['user_type'] != "adm") {
+    header("Location: home.html");
+    exit();
+}
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_type'])) {
+    $user_id = $_SESSION['user_id'];
+    $userType = $_SESSION['user_type'];
+
+}
 ?>
 
 <!DOCTYPE html>
@@ -622,6 +628,12 @@ body {
 		<a href="#" class="brand">
 			<i class='bx bxs-smile'></i>
 			<span class="text">Admin Dashboard</span>
+			<a class="brand" id="logDetail" style="margin-left: 5%;">
+				
+                <?php if (isset($user_id)) : ?>
+                    Welcome, <?php echo $user_id; ?><img src="user.png" alt="" id="UserIcon" style=" height:100%;width: auto;">
+                <?php endif; ?>
+            </a>
 		</a>
 		<ul class="side-menu top">
 
@@ -659,7 +671,7 @@ body {
 				</a>
 			</li>
 			<li>
-				<a href="#"  onclick="">
+				<a href="#"  onclick="window.location.href='logout.php'">
 					<i class='bx bxs-log-out-circle'></i>
 					<span class="text">Logout</span>
 				</a>

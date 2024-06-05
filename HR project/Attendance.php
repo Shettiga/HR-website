@@ -83,7 +83,7 @@ if(!isset($_SESSION['user_id'])){
     </style>
 </head>
 <body id="attendance-page">
-    <form action="" method="post">
+    <form action="attendenceentry.php" method="post">
         <h1>Attendance Page</h1>
         <label for="eid">Emp id:</label>
         <input type="text" id="eid" name="eid" required><br><br>
@@ -96,8 +96,6 @@ if(!isset($_SESSION['user_id'])){
             <option value="Recruitment">Recruitment</option>
              <!-- Add more options as needed -->
         </select><br><br>
-      <label for="date">Date:</label>
-      <input type="date" id="date" name="date" required><br><br>
         <label for="login_time">Login Time:</label>
         <input type="time" id="login_time" name="login_time" required><br><br>
         
@@ -120,24 +118,13 @@ if(!isset($_SESSION['user_id'])){
         });
     </script>
     <?php
-    $servername = "localhost";
-    $username = "root";
-    $password = "";
-    $database = "hr_management";
-    $table = "attendenece";
-    // Create connection
-    $conn = new mysqli($servername, $username, $password,$database);
-
-    // Check connection
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
+    include "connection.php";
     
     if(isset($_POST['submit']))
     {
     $eid=$_POST['eid'];
     $dpt=$_POST['department'];
-    $date=$_POST['date'];
+    $date=date("Y-m-d");
     $login_time=$_POST['login_time'];
     $logout_time=$_POST['logout_time'];
     $place=$_POST['place'];
