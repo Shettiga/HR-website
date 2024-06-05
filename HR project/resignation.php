@@ -11,6 +11,7 @@ $conn = new mysqli($servername, $username, $password, $dbname);
 if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $employeeId = $_POST['employeeId'];
     $username = $_POST['username'];
@@ -20,13 +21,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $leavingDate = $_POST['leavingDate'];
     $department = $_POST['department'];
     
-    $sql = "INSERT INTO resignation (  `employee_id`, `username`,` password`, `phone`, `joining_date`,`Leaving_date`, `department`) VALUES ( '$employeeId', '$username', 'password', '$phone', '$joiningDate', '$leavingDate', '$department')";
+    $sql = "INSERT INTO resignation (`employee_id`, `username`, `password`, `phone`, `joining_date`, `Leaving_date`, `department`) VALUES ('$employeeId', '$username', '$password', '$phone', '$joiningDate', '$leavingDate', '$department')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "Resignation submitted successfully!";
+        echo "";
     } else {
-        echo "Error: " . $stmt->error;
+        echo "Error: " . $conn->error;
     }
 }
+
 $conn->close();
 ?>
