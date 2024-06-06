@@ -13,7 +13,7 @@ if ($conn->connect_error) {
 }
 
 // Define table name
-$table = "hr_login";
+$table = "employee";
 
 // Fetching values from the form
 $U_fname = $_POST["fname"];
@@ -26,8 +26,11 @@ $U_phone = $_POST["phone"];
 $U_gender = $_POST["gender"];
 
 // Inserting values into the database
-$sql_insert = "INSERT INTO $table (name,  dob, phone, gender, password, email) VALUES ('$U_fname $U_mname $U_lname', '$U_dob', '$U_phone', '$U_gender', '$U_password', '$U_email')";
-
+$sql_insert = "INSERT INTO $table ( `name`, `em_email`, `em_password`, `em_gender`,`em_phone`,`em_birthday`) 
+VALUES ('$U_fname $U_mname $U_lname','$U_email' ,'$U_password','$U_gender','$U_phone','$U_dob')";
+if(isset($_POST['gender'])){echo "<script>alert('value {$_POST['gender']}');</script>";}
+else {
+echo "<script>alert('value not passed'));</script>";}
 // Execute SQL statement to insert data
 if ($conn->query($sql_insert) === TRUE) {
     echo "New record created successfully";

@@ -11,9 +11,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } elseif ($navBtn === '3') {
         include "Leave.php";
     }elseif ($navBtn === '4') {
-        include "viewresignation.php";
+        include "resignation.php";
     }elseif ($navBtn === '5') {
-        include "salary.html";
+        include "adminsalary.php";
     }elseif($navBtn==='6')
     {
       include"notices.php";
