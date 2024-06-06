@@ -16,7 +16,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $emp_id = $_POST['emp_id'];
     $department = $_POST['department'];
     $salary = $_POST['salary'];
-    $date = $_POST['date'];
+   
 
     // Check if the salary record already exists
     $check_sql = "SELECT * FROM emp_salary WHERE emp_id='$emp_id'";
@@ -27,7 +27,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $sql = "UPDATE emp_salary SET department='$department', salary='$salary', date='$date' WHERE emp_id='$emp_id'";
     } else {
         // Insert new record
-        $sql = "INSERT INTO emp_salary (emp_id, department, salary, date) VALUES ('$emp_id', '$department', '$salary', '$date')";
+        $sql = "INSERT INTO emp_salary (emp_id, department, salary) VALUES ('$emp_id', '$department', '$salary')";
     }
 
     if ($conn->query($sql) === TRUE) {
