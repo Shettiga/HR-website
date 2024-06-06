@@ -1,9 +1,16 @@
 <?php
-    include "connection.php";
+session_start();
+include "connection.php";
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_type']) && isset($_SESSION['u_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $userType = $_SESSION['user_type'];
+	$u_id=$_SESSION['u_id'];
+
+}
     
     if(isset($_POST['submit']))
     {
-    $eid=$_POST['eid'];
+    $eid=$u_id;
     $dpt=$_POST['department'];
     $date=date("Y-m-d");
     $login_time=$_POST['login_time'];
@@ -19,7 +26,7 @@
 
     // Check if the logout time is after the login time
     if ($time_worked_in_seconds < 0) {
-        echo "Logout time must be after login time.";
+        echo "<script>alert('Logout time must be after login time.'); window.location.href = 'Employee.php';</script>";
         exit;
     }
 
@@ -29,15 +36,14 @@
     $seconds = $time_worked_in_seconds % 60;
 
     // Format the output
-    $time_worked = sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+    $time_worked = sprintf("%02d h %02d m %02d s" , $hours, $minutes, $seconds);
 
     $sql="INSERT INTO `attendance`( `emp_id`, `atten_date`, `signin_time`, `signout_time`, `working_hour`, `place`)
      VALUES ('$eid','$date','$login_time','$logout_time','$time_worked','$place')";
      if ($conn->query($sql) === TRUE) {
-        echo "<script>alert('ATTENDENCE ENTERD');</script>";
-        header("location:Employee.php");
+        echo "<script>alert('ATTENDENCE ENTERD'); window.location.href = 'Employee.php';</script>";
     } else {
-        echo"<script>alert(". $conn->error.");</script> <button onclick='window.location.href='logout.php'' >Go Back</button>" ;
+        echo"<script>alert(". $conn->error.");window.location.href = 'Employee.php';</script>" ;
         
     }
     

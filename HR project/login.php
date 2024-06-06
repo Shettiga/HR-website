@@ -37,19 +37,21 @@ if(isset($_POST['admin'])){
     }
 }
 elseif(isset($_POST['Emp'])){
-    $table = "hr_login";
+    $table = "employee";
     $mail=$_POST["email"];
-    $pass=$_POST["password"];
+    $pass=$_POST["em_password"];
 
-    $sql = "SELECT * FROM $table WHERE email='$mail'";
+    $sql = "SELECT * FROM $table WHERE em_email='$mail'";
     $result = $conn->query($sql);
     if ($result->num_rows > 0) {
         // now check the password
         $row = $result->fetch_assoc();
+        $em_id = $row['em_id'];
         $storedPassword = $row['password']; 
         if ($pass === $storedPassword) {
             $_SESSION['user_id']=$mail;
             $_SESSION['user_type']="emp";
+            $_SESSION['u_id']=$em_id;
             // Passwords match, user is authenticated
             echo "Login successful!";
             header("Location:Employee.php");

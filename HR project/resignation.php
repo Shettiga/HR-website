@@ -1,18 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root"; // Replace with your MySQL username
-$password = ""; // Replace with your MySQL password
-$dbname = "hr_management"; // The database name you created earlier
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
+include "connection.php";
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["submitBT"])) {
     $employeeId = $_POST['employeeId'];
     $username = $_POST['username'];
     $password = $_POST['password'];
@@ -21,14 +9,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $leavingDate = $_POST['leavingDate'];
     $department = $_POST['department'];
     
-    $sql = "INSERT INTO resignation (`employee_id`, `username`, `password`, `phone`, `joining_date`, `Leaving_date`, `department`) VALUES ('$employeeId', '$username', '$password', '$phone', '$joiningDate', '$leavingDate', '$department')";
+    $sql = "INSERT INTO Resignation (employee_id, username, password, phone, joining_date,Leaving_date, department) VALUES ( '$employeeId', '$username', 'password', '$phone', '$joiningDate', '$leavingDate', '$department')";
 
     if ($conn->query($sql) === TRUE) {
-        echo "";
+        echo "<script>alert('Resignation submitted successfully!'); window.location.href = 'Employee.php';</script>";
     } else {
-        echo "Error: " . $conn->error;
+        echo "Error: " . $stmt->error;
     }
 }
-
 $conn->close();
 ?>

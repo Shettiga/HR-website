@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 $servername = "localhost";
 $username = "root"; // replace with your database username
 $password = ""; // replace with your database password
@@ -14,11 +12,8 @@ if ($conn->connect_error) {
     die("Connection failed: " . $conn->connect_error);
 }
 
-// Assuming employee ID is stored in session
-$emp_id = $_SESSION['emp_id']; 
-
-// Fetch employee salary details
-$sql = "SELECT emp_id, department, salary, date FROM emp_salary WHERE emp_id='$emp_id'";
+// Fetch employee salaries
+$sql = "SELECT emp_id, department, salary FROM emp_salary";
 $result = $conn->query($sql);
 ?>
 
@@ -26,7 +21,7 @@ $result = $conn->query($sql);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employee Dashboard - Salary Details</title>
+    <title>Employee Salaries</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -47,16 +42,18 @@ $result = $conn->query($sql);
         th {
             background-color: #f2f2f2;
         }
+        .salary-header {
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 <body>
-    <h2>Salary Details</h2>
+    <h2 class="salary-header">Employee Salaries</h2>
     <table>
         <tr>
             <th>Employee ID</th>
             <th>Department</th>
             <th>Salary</th>
-        
         </tr>
         <?php
         if ($result->num_rows > 0) {
@@ -68,7 +65,7 @@ $result = $conn->query($sql);
                 echo "</tr>";
             }
         } else {
-            echo "<tr><td colspan='4'>No salary details found</td></tr>";
+            echo "<tr><td colspan='3'>No salaries found</td></tr>";
         }
         $conn->close();
         ?>

@@ -20,7 +20,7 @@ $result = $conn->query($sql);
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>viewattendence</title>
+    <title>Leave Requests</title>
     <style>
         table {
             width: 100%;
@@ -54,10 +54,11 @@ $result = $conn->query($sql);
     <table>
         <tr>
             <th>Id</th>
-            <th>Em-Id</th>
-            <th>Starting Date</th>
-            <th>Ending Date</th>
-            <th>place</th>
+            <th>Attendance Date(y/m/d)</th>
+            <th>Starting time</th>
+            <th>Ending time</th>
+            <th>Working Hour</th>
+            <th>Work Place</th>
             
             
         
@@ -67,6 +68,7 @@ $result = $conn->query($sql);
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
                 echo "<td>" . $row["emp_id"] . "</td>";
+                echo "<td>" . $row["atten_date"] . "</td>";
                 echo "<td>" . $row["signin_time"] . "</td>";
                 echo "<td>" . $row["signout_time"] . "</td>";
                 echo "<td>" . $row["working_hour"] . "</td>";

@@ -7,16 +7,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     elseif($navBtn === '1') {
         include "viewattendence.php";
     } elseif ($navBtn === '2') {
-        include "department.html";
+        include "department.php";
     } elseif ($navBtn === '3') {
         include "Leave.php";
     }elseif ($navBtn === '4') {
-        include "resignation.php";
+        include "displayResignation.php";
     }elseif ($navBtn === '5') {
         include "adminsalary.php";
     }elseif($navBtn==='6')
     {
-      include"notices.php";
+      include "notices.php";
     
     }else {
         echo "Invalid navigation.";
