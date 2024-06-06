@@ -20,7 +20,7 @@
     $servername='localhost';
     $username='root';
     $password='';
-    $dbname='phpb';
+    $dbname='hr_management';
     $con=mysqli_connect($servername,$username,$password,$dbname);
     if(!$con)
     die("Error");
