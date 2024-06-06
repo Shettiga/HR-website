@@ -44,10 +44,16 @@
     <div class="form-group">
         <label for="department">Department:</label>
         <select id="department" name="department" required>
-            <option value="IT">IT</option>
-            <option value="HR">HR</option>
-            <option value="Finance">Finance</option>
-            <option value="Marketing">Marketing</option>
+        <option value="">--Select Department--</option>
+                    <option value="Administratio">Administration</option>
+                    <option value=">Finance, HR, & Administratio">Finance, HR, & Administration</option>
+                    <option value="Research">Research</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="upport">Support</option>
+                    <option value="Network Engineering">Network Engineering</option>
+                    <option value="Sales and Marketing">Sales and Marketing</option>
+                    <option value="Helpdesk">Helpdesk</option>
+                    <option value="Project Management">Project Management</option>
             <!-- Add more departments as needed -->
         </select>
     </div>
