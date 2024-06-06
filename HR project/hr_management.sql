@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 05, 2024 at 08:57 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jun 06, 2024 at 06:37 AM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -199,6 +199,19 @@ INSERT INTO `emp_salary` (`id`, `emp_id`, `department`, `salary`) VALUES
 (11, 'emp_id', 'depa', 0),
 (12, 'anupama shetty', 'IT', 0),
 (13, 'anupama shetty', 'IT', 3500000);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `feedback`
+--
+
+CREATE TABLE `feedback` (
+  `username` varchar(222) NOT NULL,
+  `email` varchar(222) NOT NULL,
+  `subject` varchar(222) NOT NULL,
+  `message` varchar(222) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
