@@ -50,8 +50,18 @@ $conn->close();
     <form method="POST" action="">
         <label for="emp_id">Employee ID:</label>
         <input type="text" id="emp_id" name="emp_id" required><br><br>
-        <label for="department">Department:</label>
-        <input type="text" id="department" name="department" required><br><br>
+        <select id="departmentList">
+                    <option value="">--Select Department--</option>
+                    <option value="1">Administration</option>
+                    <option value="2">Finance, HR, & Administration</option>
+                    <option value="3">Research</option>
+                    <option value="4">Information Technology</option>
+                    <option value="5">Support</option>
+                    <option value="6">Network Engineering</option>
+                    <option value="7">Sales and Marketing</option>
+                    <option value="8">Helpdesk</option>
+                    <option value="9">Project Management</option>
+        </select>
         <label for="salary">Salary:</label>
         <input type="text" id="salary" name="salary" required><br><br>
         <button type="submit">Submit</button>
