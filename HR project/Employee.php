@@ -6,9 +6,10 @@ if (!isset($_SESSION['user_id']) || !isset($_SESSION['user_type']) || $_SESSION[
     header("Location: home.html");
     exit();
 }
-if (isset($_SESSION['user_id']) && isset($_SESSION['user_type'])) {
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_type']) && isset($_SESSION['u_id'])) {
     $user_id = $_SESSION['user_id'];
     $userType = $_SESSION['user_type'];
+	$u_id=$_SESSION['u_id'];
 
 }
 ?>
@@ -650,11 +651,14 @@ body {
 					<i class='bx bxs-message-dots' ></i>
 					<span class="text">Leave</span>
 				</a>
-				<li>
+			</li>
+
+			<li>
 				<a href="#" onclick="navigate('S')">
 					<i class='bx bxs-message-dots' ></i>
 					<span class="text">Salary</span>
 				</a>
+			</li>
 			
 				
 			<li>

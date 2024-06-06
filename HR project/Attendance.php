@@ -1,9 +1,11 @@
 <?php
 session_start();
 
-if(!isset($_SESSION['user_id'])){
-    header("location:login.php");
-    exit();
+if (isset($_SESSION['user_id']) && isset($_SESSION['user_type']) && isset($_SESSION['u_id'])) {
+    $user_id = $_SESSION['user_id'];
+    $userType = $_SESSION['user_type'];
+	$u_id=$_SESSION['u_id'];
+
 }
 ?>
 <!DOCTYPE html>
@@ -86,19 +88,14 @@ if(!isset($_SESSION['user_id'])){
     <form action="attendenceentry.php" method="post">
         <h1>Attendance Page</h1>
         <label for="eid">Emp id:</label>
-        <input type="text" id="eid" name="eid" required><br><br>
+        <input type="text" id="eid" name="eid" value="<?php echo $u_id;?>" disabled><br><br>
         <label for="department">Department:</label>
         <select id="department" name="department" required>
-        <option value="">--Select Department--</option>
-                    <option value="administration">Administration</option>
-                    <option value="finance_hr_admin">Finance, HR, & Administration</option>
-                    <option value="research">Research</option>
-                    <option value="it">Information Technology</option>
-                    <option value="support">Support</option>
-                    <option value="network_engineering">Network Engineering</option>
-                    <option value="sales_marketing">Sales and Marketing</option>
-                    <option value="helpdesk">Helpdesk</option>
-                    <option value="project_management">Project Management</option>
+            <option value="">Select Department</option>
+            <option value="Sales">Sales</option>
+            <option value="Finance">Finance</option>
+            <option value="IT">IT</option>
+            <option value="Recruitment">Recruitment</option>
              <!-- Add more options as needed -->
         </select><br><br>
         <label for="login_time">Login Time:</label>

@@ -670,6 +670,13 @@ body {
 					<span class="text">Salary</span>
 				</a>
 			</li>
+
+			<li>
+				<a href="#" onclick="navigate('6')">
+					<i class='bx bxs-message-dots' ></i>
+					<span class="text">Notices</span>
+				</a>
+			</li>
 			<li>
 				<a href="#"  onclick="window.location.href='logout.php'">
 					<i class='bx bxs-log-out-circle'></i>

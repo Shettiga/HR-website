@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }elseif ($navBtn === 'L') {
         include "applyLeave.php";
     }elseif ($navBtn === 'R') {
-        include "employe resign.html";
+        include "ResignForm.php";
     }elseif ($navBtn === 'S') {
         include "Salary.php";
     }else {

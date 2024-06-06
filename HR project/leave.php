@@ -1,42 +1,6 @@
 <?php
-$servername = "localhost";
-$username = "root"; // replace with your database username
-$password = ""; // replace with your database password
-$dbname = "hr_management";
+include "connection.php";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Process form submission
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['id']) && isset($_POST['action'])) {
-        $id = $_POST['id'];
-        $action = $_POST['action'];
-
-        if ($action == 'approve') {
-            $sql = "UPDATE emp_leave SET leave_status='APPROVED' WHERE id=$id";
-        } else if ($action == 'reject') {
-            $sql = "UPDATE emp_leave SET leave_status='REJECTED' WHERE id=$id";
-        }
-
-        if (isset($sql) && $conn->query($sql) === TRUE) {
-            echo "Leave status updated successfully.";
-        } else {
-            echo "Error updating leave status: " . $conn->error;
-        }
-    } else {
-        echo "Invalid request. Please try again.";
-    }
-}
-
-// Fetch leave requests
-$sql = "SELECT * FROM emp_leave WHERE leave_status='Not Approve'";
-$result = $conn->query($sql);
 ?>
 
 <!DOCTYPE html>
@@ -88,6 +52,8 @@ $result = $conn->query($sql);
             <th>Approve/Reject</th>
         </tr>
         <?php
+        $sql = "SELECT * FROM emp_leave WHERE leave_status='Not Approve'";
+        $result = $conn->query($sql);
         if ($result->num_rows > 0) {
             while($row = $result->fetch_assoc()) {
                 echo "<tr>";
@@ -99,12 +65,12 @@ $result = $conn->query($sql);
                 echo "<td>" . $row["leave_status"] . "</td>";
                 echo "<td>" . $row["leave_duration"] . "</td>";
                 echo '<td>
-                        <form method="post" style="display:inline;">
+                        <form method="post" style="display:inline;" action="leaveUpdate.php">
                             <input type="hidden" name="id" value="' . $row["id"] . '">
                             <input type="hidden" name="action" value="approve">
                             <button type="submit" class="approve-button" name="approve">Approve</button>
                         </form>
-                        <form method="post" style="display:inline;">
+                        <form method="post" style="display:inline;" action="leaveUpdate.php">
                             <input type="hidden" name="id" value="' . $row["id"] . '">
                             <input type="hidden" name="action" value="reject">
                             <button type="submit" class="reject-button" name="reject">Reject</button>

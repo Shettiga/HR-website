@@ -126,7 +126,7 @@ button[type="button"] {
                 </select>
             </div>
             <div class="form-actions">
-                <button type="submit">Submit</button>
+                <button type="submit" name="submitBT" value="submit">Submit</button>
                 <button type="reset">Reset</button>
                 <button type="button" onclick="window.location.href='';">Cancel</button>
             </div>
