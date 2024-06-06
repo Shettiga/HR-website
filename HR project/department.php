@@ -112,15 +112,15 @@ include "connection.php";
                 <label for="departmentList">Department:</label>
                 <select id="departmentList" name="dep">
                     <option value="">--Select Department--</option>
-                    <option value="1">Administration</option>
-                    <option value="2">Finance, HR, & Administration</option>
-                    <option value="3">Research</option>
-                    <option value="4">Information Technology</option>
-                    <option value="5">Support</option>
-                    <option value="6">Network Engineering</option>
-                    <option value="7">Sales and Marketing</option>
-                    <option value="8">Helpdesk</option>
-                    <option value="9">Project Management</option>
+                    <option value="Administratio">Administration</option>
+                    <option value=">Finance, HR, & Administratio">Finance, HR, & Administration</option>
+                    <option value="Research">Research</option>
+                    <option value="Information Technology">Information Technology</option>
+                    <option value="upport">Support</option>
+                    <option value="Network Engineering">Network Engineering</option>
+                    <option value="Sales and Marketing">Sales and Marketing</option>
+                    <option value="Helpdesk">Helpdesk</option>
+                    <option value="Project Management">Project Management</option>
                 </select>
             </div>
             <button class="submit-btn" name="update" value="add">ADD</button>
